@@ -7,607 +7,367 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
+:root{
   --bg:#0b0d10;--s1:#12141a;--s2:#181b23;--s3:#1e222d;
   --b1:rgba(255,255,255,.06);--b2:rgba(255,255,255,.1);
   --t1:#f0f0f2;--t2:#a1a1aa;--t3:#63637a;
-  --or:#ff6b35;--or2:#ff8c5a;--ord:rgba(255,107,53,.1);
-  --gn:#34d399;--gnd:rgba(52,211,153,.1);
-  --rd:#f87171;--rdd:rgba(248,113,113,.08);
-  --cy:#22d3ee;--cyd:rgba(34,211,238,.08);
-  --pr:#a78bfa;--prd:rgba(167,139,250,.08);
-  --pk:#f472b6;
-  --sans:'Outfit',system-ui,sans-serif;
-  --mono:'JetBrains Mono',monospace;
+  --or:#ff6b35;--gn:#34d399;--rd:#f87171;--cy:#22d3ee;--pr:#a78bfa;--pk:#f472b6;
+  --sans:'Outfit',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t2);font-family:var(--sans);-webkit-font-smoothing:antialiased}
-
 .s{position:absolute;inset:0;display:flex;opacity:0;visibility:hidden;transition:opacity .5s ease,transform .5s ease;transform:scale(.98)}
 .s.on{opacity:1;visibility:visible;transform:scale(1)}
-
-/* Grid BG */
-.grid-bg::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-background-image:
-  radial-gradient(circle at 50% 50%,rgba(255,107,53,.03) 0%,transparent 70%),
-  linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-background-size:100% 100%,40px 40px,40px 40px;}
-.grid-bg>*{position:relative;z-index:1}
-
-/* Dot BG */
-.dot-bg::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
-background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);
-background-size:24px 24px;}
-.dot-bg>*{position:relative;z-index:1}
-
-/* Layouts */
-.center-col{flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 100px}
-.split-h{display:grid;grid-template-columns:1fr 1fr;height:100%}
-.split-w{display:grid;grid-template-columns:1.15fr .85fr;height:100%}
-.pad-l{padding:72px 80px;display:flex;flex-direction:column;justify-content:center}
-.pad-r{padding:72px 80px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--b1)}
-
-/* Type */
-h1{font-size:clamp(3.2rem,6vw,5.5rem);font-weight:700;color:var(--t1);line-height:1.08;letter-spacing:-.03em}
-h2{font-size:clamp(2rem,3.8vw,3.2rem);font-weight:600;color:var(--t1);line-height:1.12;letter-spacing:-.02em}
-.accent{color:var(--or)}
-.green{color:var(--gn)}
-.cyan{color:var(--cy)}
-.purple{color:var(--pr)}
-.tag{font-family:var(--mono);font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;color:var(--or);display:inline-flex;align-items:center;gap:8px;margin-bottom:18px}
-.tag::before{content:'';width:7px;height:7px;background:var(--or);border-radius:50%;display:inline-block}
-.body{font-size:1.1rem;line-height:1.6;color:var(--t2);max-width:540px;margin-top:14px}
-.small{font-size:.88rem;color:var(--t3)}
-
-/* Stat chip */
-.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;font-family:var(--mono);font-size:.75rem;background:var(--s2);border:1px solid var(--b1)}
-.chip-val{color:var(--t1);font-weight:500}
-
-/* Node connector lines (SVG based) */
+.grid-bg::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle at 50% 50%,rgba(255,107,53,.03) 0%,transparent 70%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:100% 100%,40px 40px,40px 40px}.grid-bg>*{position:relative;z-index:1}
+.dot-bg::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:24px 24px}.dot-bg>*{position:relative;z-index:1}
+.cc{flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 80px}
+.sp{display:grid;grid-template-columns:1fr 1fr;height:100%}
+.spw{display:grid;grid-template-columns:1.1fr .9fr;height:100%}
+.pl{padding:60px 72px;display:flex;flex-direction:column;justify-content:center}
+.pr{padding:60px 72px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--b1)}
+h1{font-size:clamp(3rem,5.5vw,5rem);font-weight:700;color:var(--t1);line-height:1.08;letter-spacing:-.03em}
+h2{font-size:clamp(2rem,3.5vw,3rem);font-weight:600;color:var(--t1);line-height:1.12;letter-spacing:-.02em}
+.accent{color:var(--or)}.green{color:var(--gn)}.purple{color:var(--pr)}
+.tag{font-family:var(--mono);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;color:var(--or);display:inline-flex;align-items:center;gap:8px;margin-bottom:16px}
+.tag::before{content:'';width:7px;height:7px;background:var(--or);border-radius:50%}
+.body{font-size:1.1rem;line-height:1.6;color:var(--t2);max-width:540px;margin-top:12px}
 svg text{font-family:'Outfit',system-ui,sans-serif}
-svg .mono-text{font-family:'JetBrains Mono',monospace}
-
-/* QA */
-.qa{margin-bottom:28px}
-.qa:last-child{margin-bottom:0}
-.qa-q{font-size:1.08rem;color:var(--t1);font-weight:500;margin-bottom:8px;padding-left:16px;border-left:3px solid var(--rd);display:flex;align-items:center;gap:8px}
-.qa-a{font-size:1rem;color:var(--t2);line-height:1.55;padding-left:16px;border-left:3px solid var(--gn);margin-top:8px}
-
-/* Terminal block */
-.terminal{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:24px 28px;font-family:var(--mono);font-size:.92rem;line-height:1.8;color:var(--t2)}
-.terminal .prompt{color:var(--or)}
-.terminal .output{color:var(--gn)}
-.terminal .dim{color:var(--t3)}
-
-/* Timeline */
-.tl{display:flex;flex-direction:column;gap:0}
-.tl-item{display:grid;grid-template-columns:36px 1fr;gap:16px;position:relative}
-.tl-node{display:flex;flex-direction:column;align-items:center;padding-top:3px}
-.tl-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--or);background:var(--bg);z-index:1}
-.tl-line{width:1px;flex:1;background:var(--b1);margin-top:4px}
-.tl-body{padding-bottom:24px}
-.tl-body strong{color:var(--t1);font-weight:500;font-size:1.05rem;display:block;margin-bottom:3px}
-.tl-body span{font-size:.95rem;color:var(--t3);line-height:1.5}
-
-/* Progress */
+svg .m{font-family:'JetBrains Mono',monospace}
+.qa{margin-bottom:26px}.qa:last-child{margin-bottom:0}
+.qa-q{font-size:1.05rem;color:var(--t1);font-weight:500;margin-bottom:6px;padding-left:16px;border-left:3px solid var(--rd)}
+.qa-a{font-size:1rem;color:var(--t2);line-height:1.55;padding-left:16px;border-left:3px solid var(--gn);margin-top:6px}
+.term{background:var(--s1);border:1px solid var(--b1);border-radius:12px;padding:22px 26px;font-family:var(--mono);font-size:.95rem;line-height:1.8;color:var(--t2)}
+.term .p{color:var(--or)}.term .o{color:var(--gn)}.term .d{color:var(--t3)}
+.tl-i{display:grid;grid-template-columns:36px 1fr;gap:14px}
+.tl-n{display:flex;flex-direction:column;align-items:center;padding-top:3px}
+.tl-d{width:12px;height:12px;border-radius:50%;border:2px solid var(--or);background:var(--bg)}
+.tl-l{width:1px;flex:1;background:var(--b1);margin-top:4px}
+.tl-b{padding-bottom:22px}
+.tl-b strong{color:var(--t1);font-weight:500;font-size:1.05rem;display:block;margin-bottom:2px}
+.tl-b span{font-size:.95rem;color:var(--t3);line-height:1.5}
 #P{position:fixed;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--or),var(--pk));z-index:99;transition:width .4s ease}
-#C{position:fixed;bottom:14px;right:24px;font-family:var(--mono);font-size:.62rem;color:var(--t3);z-index:99;letter-spacing:.1em}
-
-/* Anims */
+#C{position:fixed;bottom:14px;right:24px;font-family:var(--mono);font-size:.65rem;color:var(--t3);z-index:99;letter-spacing:.1em}
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-@keyframes draw{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
-.s.on .an{animation:up .6s cubic-bezier(.16,1,.3,1) both}
-.s.on .d1{animation-delay:.08s}.s.on .d2{animation-delay:.18s}.s.on .d3{animation-delay:.28s}
-.s.on .d4{animation-delay:.38s}.s.on .d5{animation-delay:.48s}.s.on .d6{animation-delay:.58s}
-.s.on .d7{animation-delay:.68s}.s.on .d8{animation-delay:.78s}
-.s.on .draw-line{animation:draw 1.2s ease both;animation-delay:.3s}
-
-@media(max-width:900px){
-  .split-h,.split-w{grid-template-columns:1fr}
-  .pad-r{border-left:none;border-top:1px solid var(--b1)}
-  .center-col{padding:36px 28px}
-  .pad-l,.pad-r{padding:36px 28px}
-}
+@keyframes dr{from{stroke-dashoffset:1600}to{stroke-dashoffset:0}}
+.s.on .a{animation:up .6s cubic-bezier(.16,1,.3,1) both}
+.s.on .a1{animation-delay:.08s}.s.on .a2{animation-delay:.18s}.s.on .a3{animation-delay:.28s}
+.s.on .a4{animation-delay:.38s}.s.on .a5{animation-delay:.48s}.s.on .a6{animation-delay:.58s}
+.s.on .a7{animation-delay:.68s}
+.s.on .dl{animation:dr 1.2s ease both;animation-delay:.3s}
+@media(max-width:900px){.sp,.spw{grid-template-columns:1fr}.pr{border-left:none;border-top:1px solid var(--b1)}.cc{padding:32px 24px}.pl,.pr{padding:32px 24px}}
 </style>
 </head>
 <body>
+<div id="P"></div><div id="C"></div>
 
-<div id="P"></div>
-<div id="C"></div>
-
-<!-- ═══ 0: TITLE ═══ -->
-<div class="s grid-bg center-col">
-  <div class="tag an">No Fluff Real Estate</div>
-  <h1 class="an d1">The <span class="accent">Blueprint</span></h1>
-  <p class="body an d2" style="text-align:center;max-width:600px;font-size:1.2rem">How we source off-market deals for ~$190 while the rest of the industry burns $3,000–$6,000+</p>
-
-  <!-- Stats as a system diagram -->
-  <svg viewBox="0 0 600 100" class="an d3" style="max-width:700px;margin-top:44px;width:100%" xmlns="http://www.w3.org/2000/svg">
-    <!-- connecting line -->
-    <line x1="100" y1="50" x2="500" y2="50" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="4,4"/>
-    <!-- node 1 -->
-    <circle cx="100" cy="50" r="36" fill="#12141a" stroke="#ff6b35" stroke-width="1.5"/>
-    <text x="100" y="45" text-anchor="middle" fill="#f0f0f2" font-size="18" font-weight="600">2,000+</text>
-    <text x="100" y="62" text-anchor="middle" fill="#63637a" font-size="9" class="mono-text" letter-spacing="1">DEALS</text>
-    <!-- node 2 -->
-    <circle cx="300" cy="50" r="36" fill="#12141a" stroke="#ff6b35" stroke-width="1.5"/>
-    <text x="300" y="45" text-anchor="middle" fill="#f0f0f2" font-size="18" font-weight="600">7+ yrs</text>
-    <text x="300" y="62" text-anchor="middle" fill="#63637a" font-size="9" class="mono-text" letter-spacing="1">ACTIVE</text>
-    <!-- node 3 -->
-    <circle cx="500" cy="50" r="36" fill="#12141a" stroke="#34d399" stroke-width="1.5"/>
-    <text x="500" y="45" text-anchor="middle" fill="#34d399" font-size="18" font-weight="600">$190</text>
-    <text x="500" y="62" text-anchor="middle" fill="#63637a" font-size="9" class="mono-text" letter-spacing="1">AVG COST</text>
-    <!-- arrows -->
-    <polygon points="136,50 145,46 145,54" fill="#ff6b35" opacity=".4"/>
-    <polygon points="336,50 345,46 345,54" fill="#ff6b35" opacity=".4"/>
+<!-- 0: TITLE -->
+<div class="s grid-bg cc">
+  <div class="tag a">No Fluff Real Estate</div>
+  <h1 class="a a1">The <span class="accent">Blueprint</span></h1>
+  <p class="body a a2" style="text-align:center;max-width:620px;font-size:1.2rem">How we source off-market deals for ~$190 while the rest of the industry burns $3,000–$6,000+</p>
+  <svg viewBox="0 0 700 120" class="a a3" style="max-width:860px;margin-top:48px;width:100%" xmlns="http://www.w3.org/2000/svg">
+    <line x1="120" y1="60" x2="580" y2="60" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+    <circle cx="120" cy="60" r="48" fill="#12141a" stroke="#ff6b35" stroke-width="1.5"/>
+    <text x="120" y="54" text-anchor="middle" fill="#f0f0f2" font-size="20" font-weight="600">2,000+</text>
+    <text x="120" y="74" text-anchor="middle" fill="#63637a" font-size="10" class="m" letter-spacing="1.5">DEALS</text>
+    <polygon points="168,60 178,55 178,65" fill="#ff6b35" opacity=".4"/>
+    <circle cx="350" cy="60" r="48" fill="#12141a" stroke="#ff6b35" stroke-width="1.5"/>
+    <text x="350" y="54" text-anchor="middle" fill="#f0f0f2" font-size="20" font-weight="600">7+ Years</text>
+    <text x="350" y="74" text-anchor="middle" fill="#63637a" font-size="10" class="m" letter-spacing="1.5">ACTIVE</text>
+    <polygon points="398,60 408,55 408,65" fill="#ff6b35" opacity=".4"/>
+    <circle cx="580" cy="60" r="48" fill="#12141a" stroke="#34d399" stroke-width="1.5"/>
+    <text x="580" y="54" text-anchor="middle" fill="#34d399" font-size="20" font-weight="600">~$190</text>
+    <text x="580" y="74" text-anchor="middle" fill="#63637a" font-size="10" class="m" letter-spacing="1.5">AVG COST</text>
   </svg>
 </div>
 
-<!-- ═══ 1: THE PROBLEM ═══ -->
-<div class="s split-h">
-  <div class="pad-l">
-    <div class="tag an">The Reality</div>
-    <h2 class="an d1">The traditional model is <span class="accent">broken</span></h2>
-    <p class="body an d2">More spend. More people. Worse margins. The model itself is the ceiling.</p>
-  </div>
-  <div class="pad-r" style="align-items:center">
-    <!-- Comparison diagram -->
-    <svg viewBox="0 0 420 320" class="an d3" style="max-width:460px;width:100%" xmlns="http://www.w3.org/2000/svg">
-      <!-- Traditional column -->
-      <rect x="10" y="10" width="185" height="300" rx="8" fill="#12141a" stroke="rgba(248,113,113,.2)" stroke-width="1"/>
-      <text x="102" y="40" text-anchor="middle" fill="#f87171" font-size="11" font-weight="600" letter-spacing="1" class="mono-text">TRADITIONAL</text>
-      <line x1="30" y1="54" x2="175" y2="54" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-      <circle cx="36" cy="78" r="3" fill="#f87171"/><text x="48" y="82" fill="#a1a1aa" font-size="11">$2K–$6K+ per deal</text>
-      <circle cx="36" cy="108" r="3" fill="#f87171"/><text x="48" y="112" fill="#a1a1aa" font-size="11">90–120 days to close</text>
-      <circle cx="36" cy="138" r="3" fill="#f87171"/><text x="48" y="142" fill="#a1a1aa" font-size="11">$15K+ startup</text>
-      <circle cx="36" cy="168" r="3" fill="#f87171"/><text x="48" y="172" fill="#a1a1aa" font-size="11">TCPA risk</text>
-      <circle cx="36" cy="198" r="3" fill="#f87171"/><text x="48" y="202" fill="#a1a1aa" font-size="11">Cold calls & VAs</text>
-      <circle cx="36" cy="228" r="3" fill="#f87171"/><text x="48" y="232" fill="#a1a1aa" font-size="11">Scale = more overhead</text>
-      <!-- No Fluff column -->
-      <rect x="225" y="10" width="185" height="300" rx="8" fill="#12141a" stroke="rgba(52,211,153,.2)" stroke-width="1"/>
-      <text x="317" y="40" text-anchor="middle" fill="#34d399" font-size="11" font-weight="600" letter-spacing="1" class="mono-text">NO FLUFF</text>
-      <line x1="245" y1="54" x2="390" y2="54" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-      <circle cx="251" cy="78" r="3" fill="#34d399"/><text x="263" y="82" fill="#a1a1aa" font-size="11">~$190 per deal</text>
-      <circle cx="251" cy="108" r="3" fill="#34d399"/><text x="263" y="112" fill="#a1a1aa" font-size="11">14–21 days to close</text>
-      <circle cx="251" cy="138" r="3" fill="#34d399"/><text x="263" y="142" fill="#a1a1aa" font-size="11">Minimal startup</text>
-      <circle cx="251" cy="168" r="3" fill="#34d399"/><text x="263" y="172" fill="#a1a1aa" font-size="11">Public numbers</text>
-      <circle cx="251" cy="198" r="3" fill="#34d399"/><text x="263" y="202" fill="#a1a1aa" font-size="11">AI handles outreach</text>
-      <circle cx="251" cy="228" r="3" fill="#34d399"/><text x="263" y="232" fill="#a1a1aa" font-size="11">Scale = same overhead</text>
-      <!-- VS -->
-      <circle cx="210" cy="160" r="16" fill="#1e222d" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-      <text x="210" y="164" text-anchor="middle" fill="#63637a" font-size="9" font-weight="600">VS</text>
+<!-- 1: THE PROBLEM -->
+<div class="s sp">
+  <div class="pl"><div class="tag a">The Reality</div><h2 class="a a1">The traditional model is <span class="accent">broken</span></h2><p class="body a a2">More spend. More people. Worse margins. The model itself is the ceiling.</p></div>
+  <div class="pr" style="align-items:center">
+    <svg viewBox="0 0 500 380" class="a a3" style="width:100%" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="220" height="360" rx="10" fill="#12141a" stroke="rgba(248,113,113,.2)"/>
+      <text x="120" y="42" text-anchor="middle" fill="#f87171" font-size="12" font-weight="600" letter-spacing="1.5" class="m">TRADITIONAL</text>
+      <line x1="30" y1="58" x2="210" y2="58" stroke="rgba(255,255,255,.06)"/>
+      <circle cx="38" cy="90" r="4" fill="#f87171"/><text x="54" y="95" fill="#a1a1aa" font-size="14">$2K–$6K+ per deal</text>
+      <circle cx="38" cy="130" r="4" fill="#f87171"/><text x="54" y="135" fill="#a1a1aa" font-size="14">90–120 days to close</text>
+      <circle cx="38" cy="170" r="4" fill="#f87171"/><text x="54" y="175" fill="#a1a1aa" font-size="14">$15K+ startup cost</text>
+      <circle cx="38" cy="210" r="4" fill="#f87171"/><text x="54" y="215" fill="#a1a1aa" font-size="14">TCPA compliance risk</text>
+      <circle cx="38" cy="250" r="4" fill="#f87171"/><text x="54" y="255" fill="#a1a1aa" font-size="14">Cold calls & VAs</text>
+      <circle cx="38" cy="290" r="4" fill="#f87171"/><text x="54" y="295" fill="#a1a1aa" font-size="14">Scale = more overhead</text>
+      <rect x="270" y="10" width="220" height="360" rx="10" fill="#12141a" stroke="rgba(52,211,153,.2)"/>
+      <text x="380" y="42" text-anchor="middle" fill="#34d399" font-size="12" font-weight="600" letter-spacing="1.5" class="m">NO FLUFF</text>
+      <line x1="290" y1="58" x2="470" y2="58" stroke="rgba(255,255,255,.06)"/>
+      <circle cx="298" cy="90" r="4" fill="#34d399"/><text x="314" y="95" fill="#a1a1aa" font-size="14">~$190 per deal</text>
+      <circle cx="298" cy="130" r="4" fill="#34d399"/><text x="314" y="135" fill="#a1a1aa" font-size="14">14–21 days to close</text>
+      <circle cx="298" cy="170" r="4" fill="#34d399"/><text x="314" y="175" fill="#a1a1aa" font-size="14">Minimal startup</text>
+      <circle cx="298" cy="210" r="4" fill="#34d399"/><text x="314" y="215" fill="#a1a1aa" font-size="14">Public numbers</text>
+      <circle cx="298" cy="250" r="4" fill="#34d399"/><text x="314" y="255" fill="#a1a1aa" font-size="14">AI handles outreach</text>
+      <circle cx="298" cy="290" r="4" fill="#34d399"/><text x="314" y="295" fill="#a1a1aa" font-size="14">Scale = same overhead</text>
+      <circle cx="245" cy="190" r="20" fill="#1e222d" stroke="rgba(255,255,255,.1)"/>
+      <text x="245" y="195" text-anchor="middle" fill="#63637a" font-size="11" font-weight="600">VS</text>
     </svg>
   </div>
 </div>
 
-<!-- ═══ 2: THREE PILLARS — TRIANGLE ═══ -->
-<div class="s grid-bg center-col">
-  <div class="tag an">What Makes This Different</div>
-  <h2 class="an d1">Three pillars of <span class="accent">No Fluff</span></h2>
-  <p class="body an d2" style="text-align:center;max-width:520px">It's not just one thing. It's three things working together as a system.</p>
-
-  <!-- TRIANGLE DIAGRAM -->
-  <svg viewBox="0 0 600 420" class="an d3" style="max-width:680px;margin-top:36px;width:100%" xmlns="http://www.w3.org/2000/svg">
-    <!-- Triangle outline -->
-    <polygon points="300,40 540,360 60,360" fill="none" stroke="rgba(255,107,53,.15)" stroke-width="1.5" stroke-dasharray="6,3" class="draw-line" style="stroke-dasharray:1600;stroke-dashoffset:1600"/>
-    <!-- Inner glow -->
-    <polygon points="300,40 540,360 60,360" fill="url(#triGlow)" opacity=".6"/>
-    <defs>
-      <radialGradient id="triGlow" cx="50%" cy="60%" r="50%">
-        <stop offset="0%" stop-color="rgba(255,107,53,.06)"/>
-        <stop offset="100%" stop-color="transparent"/>
-      </radialGradient>
-    </defs>
-
-    <!-- Node: MODEL (top) -->
-    <circle cx="300" cy="40" r="44" fill="#12141a" stroke="#ff6b35" stroke-width="2"/>
-    <text x="300" y="32" text-anchor="middle" fill="#ff6b35" font-size="10" font-weight="600" class="mono-text" letter-spacing="1.5">01</text>
-    <text x="300" y="50" text-anchor="middle" fill="#f0f0f2" font-size="13" font-weight="600">THE MODEL</text>
-    <!-- description -->
-    <text x="300" y="110" text-anchor="middle" fill="#63637a" font-size="10">Agent-outreach strategy</text>
-    <text x="300" y="124" text-anchor="middle" fill="#63637a" font-size="10">sourcing from 90% of the market</text>
-
-    <!-- Node: TOOL (bottom-right) -->
-    <circle cx="540" cy="360" r="44" fill="#12141a" stroke="#a78bfa" stroke-width="2"/>
-    <text x="540" y="352" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="600" class="mono-text" letter-spacing="1.5">02</text>
-    <text x="540" y="370" text-anchor="middle" fill="#f0f0f2" font-size="13" font-weight="600">THE TOOL</text>
-    <!-- description -->
-    <text x="480" y="310" text-anchor="middle" fill="#63637a" font-size="10">AI-powered CRM</text>
-    <text x="480" y="324" text-anchor="middle" fill="#63637a" font-size="10">automating everything</text>
-
-    <!-- Node: IMPLEMENTATION (bottom-left) -->
-    <circle cx="60" cy="360" r="44" fill="#12141a" stroke="#34d399" stroke-width="2"/>
-    <text x="60" y="352" text-anchor="middle" fill="#34d399" font-size="10" font-weight="600" class="mono-text" letter-spacing="1.5">03</text>
-    <text x="60" y="370" text-anchor="middle" fill="#f0f0f2" font-size="12" font-weight="600">SUPPORT</text>
-    <!-- description -->
-    <text x="125" y="310" text-anchor="middle" fill="#63637a" font-size="10">1-on-1 onboarding, calls,</text>
-    <text x="125" y="324" text-anchor="middle" fill="#63637a" font-size="10">challenges & AI assistant</text>
-
-    <!-- Center label -->
-    <text x="300" y="280" text-anchor="middle" fill="rgba(255,107,53,.3)" font-size="11" font-weight="600" class="mono-text" letter-spacing="3">NO FLUFF SYSTEM</text>
+<!-- 2: THREE PILLARS TRIANGLE -->
+<div class="s grid-bg cc">
+  <div class="tag a">What Makes This Different</div>
+  <h2 class="a a1">Three pillars of <span class="accent">No Fluff</span></h2>
+  <p class="body a a2" style="text-align:center;max-width:520px">It's not just one thing. It's three working together as a system.</p>
+  <svg viewBox="0 0 700 480" class="a a3" style="max-width:90%;margin-top:36px;width:100%" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="350,50 630,410 70,410" fill="none" stroke="rgba(255,107,53,.15)" stroke-width="1.5" stroke-dasharray="6,3" class="dl" style="stroke-dasharray:1600;stroke-dashoffset:1600"/>
+    <polygon points="350,50 630,410 70,410" fill="url(#tg)" opacity=".6"/>
+    <defs><radialGradient id="tg" cx="50%" cy="60%" r="50%"><stop offset="0%" stop-color="rgba(255,107,53,.06)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+    <circle cx="350" cy="50" r="52" fill="#12141a" stroke="#ff6b35" stroke-width="2"/>
+    <text x="350" y="40" text-anchor="middle" fill="#ff6b35" font-size="11" font-weight="600" class="m" letter-spacing="2">01</text>
+    <text x="350" y="60" text-anchor="middle" fill="#f0f0f2" font-size="15" font-weight="600">THE MODEL</text>
+    <text x="350" y="128" text-anchor="middle" fill="#a1a1aa" font-size="13">Agent-outreach strategy</text>
+    <text x="350" y="148" text-anchor="middle" fill="#63637a" font-size="13">sourcing from 90% of the market</text>
+    <circle cx="630" cy="410" r="52" fill="#12141a" stroke="#a78bfa" stroke-width="2"/>
+    <text x="630" y="400" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="600" class="m" letter-spacing="2">02</text>
+    <text x="630" y="420" text-anchor="middle" fill="#f0f0f2" font-size="15" font-weight="600">THE TOOL</text>
+    <text x="545" y="352" text-anchor="middle" fill="#a1a1aa" font-size="13">AI-powered CRM that</text>
+    <text x="545" y="372" text-anchor="middle" fill="#63637a" font-size="13">automates everything</text>
+    <circle cx="70" cy="410" r="52" fill="#12141a" stroke="#34d399" stroke-width="2"/>
+    <text x="70" y="400" text-anchor="middle" fill="#34d399" font-size="11" font-weight="600" class="m" letter-spacing="2">03</text>
+    <text x="70" y="420" text-anchor="middle" fill="#f0f0f2" font-size="15" font-weight="600">SUPPORT</text>
+    <text x="155" y="352" text-anchor="middle" fill="#a1a1aa" font-size="13">1-on-1 onboarding, calls,</text>
+    <text x="155" y="372" text-anchor="middle" fill="#63637a" font-size="13">challenges & AI assistant</text>
+    <text x="350" y="315" text-anchor="middle" fill="rgba(255,107,53,.25)" font-size="14" font-weight="600" class="m" letter-spacing="4">NO FLUFF SYSTEM</text>
   </svg>
 </div>
 
-<!-- ═══ 3: PILLAR 1 — THE MODEL ═══ -->
-<div class="s split-w">
-  <div class="pad-l">
-    <div class="tag an">Pillar 01 — The Model</div>
-    <h2 class="an d1">Work with the <span class="accent">gatekeepers</span></h2>
-    <p class="body an d2">Agents control 90% of all home sales. We build relationships with them — not compete against them. We're their resource for ugly, off-market situations they can't retail.</p>
-    <p class="body an d3" style="margin-top:12px">They send us deals. We both win. This isn't cold calling homeowners.</p>
-    <div class="terminal an d4" style="margin-top:28px;max-width:480px">
-      <div class="dim">// NAR Generational Trends Report</div>
-      <div><span class="prompt">seller_method:</span> 90% use agent/broker</div>
-      <div><span class="prompt">direct_to_buyer:</span> only 2%</div>
-      <div class="output">→ fish where the fish are</div>
-    </div>
+<!-- 3: PILLAR 1 MODEL -->
+<div class="s spw">
+  <div class="pl"><div class="tag a">Pillar 01 — The Model</div><h2 class="a a1">Work with the <span class="accent">gatekeepers</span></h2><p class="body a a2">Agents control 90% of all home sales. We build relationships with them — not compete against them. We're their resource for ugly, off-market situations they can't retail.</p><p class="body a a3" style="margin-top:12px">They send us deals. We both win. This isn't cold calling homeowners.</p>
+    <div class="term a a4" style="margin-top:24px;max-width:500px"><div class="d">// NAR Generational Trends Report</div><div><span class="p">seller_method:</span> 90% use agent/broker</div><div><span class="p">direct_to_buyer:</span> only 2%</div><div class="o">→ fish where the fish are</div></div>
   </div>
-  <div class="pad-r" style="align-items:center">
-    <!-- Decision tree: where deals come from -->
-    <svg viewBox="0 0 340 360" class="an d3" style="max-width:380px;width:100%" xmlns="http://www.w3.org/2000/svg">
-      <text x="170" y="16" text-anchor="middle" fill="#63637a" font-size="9" class="mono-text" letter-spacing="1.5">ALL HOME SALES</text>
-      <!-- Root -->
-      <rect x="115" y="28" width="110" height="36" rx="6" fill="#1e222d" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-      <text x="170" y="50" text-anchor="middle" fill="#f0f0f2" font-size="11" font-weight="500">100% of Sellers</text>
-      <!-- Branch lines -->
-      <line x1="140" y1="64" x2="80" y2="104" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-      <line x1="200" y1="64" x2="260" y2="104" stroke="rgba(255,107,53,.3)" stroke-width="1.5"/>
-      <!-- Left: Direct (2%) -->
-      <rect x="20" y="104" width="120" height="48" rx="6" fill="rgba(248,113,113,.06)" stroke="rgba(248,113,113,.15)" stroke-width="1"/>
-      <text x="80" y="124" text-anchor="middle" fill="#f87171" font-size="10" font-weight="600">2% Direct</text>
-      <text x="80" y="140" text-anchor="middle" fill="#63637a" font-size="9">Everyone else fishes here</text>
-      <!-- Right: Agents (90%) -->
-      <rect x="200" y="104" width="120" height="48" rx="6" fill="rgba(255,107,53,.08)" stroke="rgba(255,107,53,.25)" stroke-width="1.5"/>
-      <text x="260" y="124" text-anchor="middle" fill="#ff6b35" font-size="10" font-weight="600">90% Use Agents</text>
-      <text x="260" y="140" text-anchor="middle" fill="#a1a1aa" font-size="9">We work HERE</text>
-      <!-- Arrow down from 90% -->
-      <line x1="260" y1="152" x2="260" y2="190" stroke="rgba(255,107,53,.3)" stroke-width="1"/>
-      <polygon points="260,195 255,186 265,186" fill="#ff6b35" opacity=".5"/>
-      <!-- Agent types -->
-      <rect x="170" y="200" width="180" height="44" rx="6" fill="#12141a" stroke="rgba(255,107,53,.2)" stroke-width="1"/>
-      <text x="260" y="220" text-anchor="middle" fill="#f0f0f2" font-size="10" font-weight="500">Gatekeepers with ugly deals</text>
-      <text x="260" y="234" text-anchor="middle" fill="#63637a" font-size="9">can't retail → need exit strategy</text>
-      <!-- Arrow down -->
-      <line x1="260" y1="244" x2="260" y2="275" stroke="rgba(52,211,153,.3)" stroke-width="1"/>
-      <polygon points="260,280 255,271 265,271" fill="#34d399" opacity=".5"/>
-      <!-- Result -->
-      <rect x="185" y="285" width="150" height="44" rx="6" fill="rgba(52,211,153,.08)" stroke="rgba(52,211,153,.25)" stroke-width="1.5"/>
-      <text x="260" y="305" text-anchor="middle" fill="#34d399" font-size="10" font-weight="600">Off-Market Deals</text>
-      <text x="260" y="319" text-anchor="middle" fill="#a1a1aa" font-size="9">$190 avg cost per deal</text>
+  <div class="pr" style="align-items:center">
+    <svg viewBox="0 0 400 440" class="a a3" style="width:100%;max-height:78vh" xmlns="http://www.w3.org/2000/svg">
+      <text x="200" y="18" text-anchor="middle" fill="#63637a" font-size="11" class="m" letter-spacing="2">ALL HOME SALES</text>
+      <rect x="120" y="32" width="160" height="44" rx="8" fill="#1e222d" stroke="rgba(255,255,255,.1)"/>
+      <text x="200" y="59" text-anchor="middle" fill="#f0f0f2" font-size="14" font-weight="500">100% of Sellers</text>
+      <line x1="155" y1="76" x2="90" y2="120" stroke="rgba(255,255,255,.08)"/>
+      <line x1="245" y1="76" x2="310" y2="120" stroke="rgba(255,107,53,.3)" stroke-width="1.5"/>
+      <rect x="15" y="124" width="155" height="60" rx="8" fill="rgba(248,113,113,.06)" stroke="rgba(248,113,113,.15)"/>
+      <text x="92" y="150" text-anchor="middle" fill="#f87171" font-size="14" font-weight="600">2% Direct</text>
+      <text x="92" y="170" text-anchor="middle" fill="#63637a" font-size="11">Everyone fishes here</text>
+      <rect x="230" y="124" width="155" height="60" rx="8" fill="rgba(255,107,53,.08)" stroke="rgba(255,107,53,.25)" stroke-width="1.5"/>
+      <text x="307" y="150" text-anchor="middle" fill="#ff6b35" font-size="14" font-weight="600">90% Use Agents</text>
+      <text x="307" y="170" text-anchor="middle" fill="#a1a1aa" font-size="11">We work HERE</text>
+      <line x1="307" y1="184" x2="307" y2="230" stroke="rgba(255,107,53,.3)"/>
+      <polygon points="307,236 302,226 312,226" fill="#ff6b35" opacity=".5"/>
+      <rect x="200" y="242" width="215" height="56" rx="8" fill="#12141a" stroke="rgba(255,107,53,.2)"/>
+      <text x="307" y="266" text-anchor="middle" fill="#f0f0f2" font-size="13" font-weight="500">Gatekeepers with ugly deals</text>
+      <text x="307" y="286" text-anchor="middle" fill="#63637a" font-size="11">Can't retail → need exit strategy</text>
+      <line x1="307" y1="298" x2="307" y2="340" stroke="rgba(52,211,153,.3)"/>
+      <polygon points="307,346 302,336 312,336" fill="#34d399" opacity=".5"/>
+      <rect x="210" y="352" width="195" height="56" rx="8" fill="rgba(52,211,153,.08)" stroke="rgba(52,211,153,.25)" stroke-width="1.5"/>
+      <text x="307" y="376" text-anchor="middle" fill="#34d399" font-size="14" font-weight="600">Off-Market Deals</text>
+      <text x="307" y="396" text-anchor="middle" fill="#a1a1aa" font-size="12">~$190 avg cost per deal</text>
     </svg>
   </div>
 </div>
 
-<!-- ═══ 4: MODEL OBJECTIONS ═══ -->
-<div class="s split-h">
-  <div class="pad-l">
-    <div class="tag an">Pillar 01 — The Model</div>
-    <h2 class="an d1">Why agents <span class="accent">actually</span> work</h2>
-    <p class="body an d2">Most people push back immediately. Here's what they're really thinking — and why the data says otherwise.</p>
-  </div>
-  <div class="pad-r">
-    <div class="qa an d2">
-      <div class="qa-q">"Why would agents send me deals?"</div>
-      <div class="qa-a">You're solving a problem they already have. Ugly listings they can't retail. You're an exit strategy, not competition. Incentives are aligned.</div>
-    </div>
-    <div class="qa an d3">
-      <div class="qa-q">"I've tried texting agents — it doesn't work."</div>
-      <div class="qa-a">Random texting isn't a system. We categorize agents into tiers, nurture relationships over months, and AI handles volume. It's a pipeline, not a blast.</div>
-    </div>
-    <div class="qa an d4">
-      <div class="qa-q">"This sounds too simple."</div>
-      <div class="qa-a">Simple ≠ easy. The model is simple. Execution takes consistency. That's why you get the tool AND implementation — not just a strategy.</div>
-    </div>
+<!-- 4: MODEL OBJECTIONS -->
+<div class="s sp">
+  <div class="pl"><div class="tag a">Pillar 01 — The Model</div><h2 class="a a1">Why agents <span class="accent">actually</span> work</h2><p class="body a a2">Most people push back immediately. Here's what they're thinking — and why the data says otherwise.</p></div>
+  <div class="pr">
+    <div class="qa a a2"><div class="qa-q">"Why would agents send me deals?"</div><div class="qa-a">You're solving a problem they already have. Ugly listings they can't retail. You're an exit strategy, not competition.</div></div>
+    <div class="qa a a3"><div class="qa-q">"I've tried texting agents — it doesn't work."</div><div class="qa-a">Random texting isn't a system. We categorize agents into tiers, nurture relationships over months, and AI handles volume. It's a pipeline, not a blast.</div></div>
+    <div class="qa a a4"><div class="qa-q">"This sounds too simple."</div><div class="qa-a">Simple ≠ easy. The model is simple. Execution takes consistency. That's why you get the tool AND implementation — not just a strategy.</div></div>
   </div>
 </div>
 
-<!-- ═══ 5: THE NUMBERS — PIPELINE DIAGRAM ═══ -->
-<div class="s grid-bg center-col">
-  <div class="tag an">Pillar 01 — The Model</div>
-  <h2 class="an d1">The <span class="accent">numbers</span> behind it</h2>
-  <p class="body an d2" style="text-align:center;max-width:520px">This isn't guesswork. 2,000+ deals. We know exactly what it takes.</p>
-
-  <!-- Pipeline flow diagram -->
-  <svg viewBox="0 0 780 200" class="an d3" style="max-width:880px;margin-top:40px;width:100%" xmlns="http://www.w3.org/2000/svg">
-    <!-- Connecting arrows -->
-    <line x1="160" y1="70" x2="200" y2="70" stroke="rgba(255,107,53,.3)" stroke-width="1" stroke-dasharray="4,3"/>
-    <polygon points="204,70 196,66 196,74" fill="#ff6b35" opacity=".4"/>
-    <line x1="370" y1="70" x2="410" y2="70" stroke="rgba(255,107,53,.3)" stroke-width="1" stroke-dasharray="4,3"/>
-    <polygon points="414,70 406,66 406,74" fill="#ff6b35" opacity=".4"/>
-    <line x1="580" y1="70" x2="620" y2="70" stroke="rgba(52,211,153,.3)" stroke-width="1" stroke-dasharray="4,3"/>
-    <polygon points="624,70 616,66 616,74" fill="#34d399" opacity=".4"/>
-
-    <!-- Node 1: Texts -->
-    <rect x="10" y="30" width="150" height="80" rx="10" fill="#12141a" stroke="rgba(255,107,53,.3)" stroke-width="1.5"/>
-    <text x="85" y="60" text-anchor="middle" fill="#ff6b35" font-size="26" font-weight="700">500</text>
-    <text x="85" y="80" text-anchor="middle" fill="#63637a" font-size="9" class="mono-text" letter-spacing="1">TEXTS / DAY</text>
-
-    <!-- Node 2: Response -->
-    <rect x="210" y="30" width="150" height="80" rx="10" fill="#12141a" stroke="rgba(34,211,238,.25)" stroke-width="1.5"/>
-    <text x="285" y="60" text-anchor="middle" fill="#22d3ee" font-size="26" font-weight="700">~10%</text>
-    <text x="285" y="80" text-anchor="middle" fill="#63637a" font-size="9" class="mono-text" letter-spacing="1">RESPONSE RATE</text>
-
-    <!-- Node 3: Properties -->
-    <rect x="420" y="30" width="150" height="80" rx="10" fill="#12141a" stroke="rgba(167,139,250,.25)" stroke-width="1.5"/>
-    <text x="495" y="60" text-anchor="middle" fill="#a78bfa" font-size="26" font-weight="700">3–8</text>
-    <text x="495" y="80" text-anchor="middle" fill="#63637a" font-size="9" class="mono-text" letter-spacing="1">PROPERTIES / DAY</text>
-
-    <!-- Node 4: Deals -->
-    <rect x="630" y="30" width="140" height="80" rx="10" fill="rgba(52,211,153,.06)" stroke="rgba(52,211,153,.35)" stroke-width="2"/>
-    <text x="700" y="60" text-anchor="middle" fill="#34d399" font-size="26" font-weight="700">1–2</text>
-    <text x="700" y="80" text-anchor="middle" fill="#63637a" font-size="9" class="mono-text" letter-spacing="1">DEALS / MONTH</text>
-
-    <!-- Bottom stats -->
-    <text x="85" y="150" text-anchor="middle" fill="#a1a1aa" font-size="11" font-weight="500">22–40%</text>
-    <text x="85" y="165" text-anchor="middle" fill="#63637a" font-size="9">off-market rate</text>
-
-    <text x="285" y="150" text-anchor="middle" fill="#a1a1aa" font-size="11" font-weight="500">12–20</text>
-    <text x="285" y="165" text-anchor="middle" fill="#63637a" font-size="9">leads per deal</text>
-
-    <text x="495" y="150" text-anchor="middle" fill="#a1a1aa" font-size="11" font-weight="500">~$190</text>
-    <text x="495" y="165" text-anchor="middle" fill="#63637a" font-size="9">cost per deal</text>
-
-    <text x="700" y="150" text-anchor="middle" fill="#a1a1aa" font-size="11" font-weight="500">14–21 days</text>
-    <text x="700" y="165" text-anchor="middle" fill="#63637a" font-size="9">lead to close</text>
+<!-- 5: THE NUMBERS PIPELINE -->
+<div class="s grid-bg cc">
+  <div class="tag a">Pillar 01 — The Model</div>
+  <h2 class="a a1">The <span class="accent">numbers</span> behind it</h2>
+  <p class="body a a2" style="text-align:center;max-width:520px">This isn't guesswork. 2,000+ deals. We know exactly what it takes.</p>
+  <svg viewBox="0 0 900 220" class="a a3" style="max-width:95%;margin-top:40px;width:100%" xmlns="http://www.w3.org/2000/svg">
+    <line x1="195" y1="75" x2="235" y2="75" stroke="rgba(255,107,53,.3)" stroke-dasharray="4,3"/><polygon points="240,75 232,70 232,80" fill="#ff6b35" opacity=".4"/>
+    <line x1="430" y1="75" x2="470" y2="75" stroke="rgba(255,107,53,.3)" stroke-dasharray="4,3"/><polygon points="475,75 467,70 467,80" fill="#ff6b35" opacity=".4"/>
+    <line x1="665" y1="75" x2="705" y2="75" stroke="rgba(52,211,153,.3)" stroke-dasharray="4,3"/><polygon points="710,75 702,70 702,80" fill="#34d399" opacity=".4"/>
+    <rect x="10" y="30" width="185" height="90" rx="12" fill="#12141a" stroke="rgba(255,107,53,.3)" stroke-width="1.5"/>
+    <text x="102" y="68" text-anchor="middle" fill="#ff6b35" font-size="30" font-weight="700">500</text>
+    <text x="102" y="92" text-anchor="middle" fill="#63637a" font-size="11" class="m" letter-spacing="1.5">TEXTS / DAY</text>
+    <rect x="245" y="30" width="185" height="90" rx="12" fill="#12141a" stroke="rgba(34,211,238,.25)" stroke-width="1.5"/>
+    <text x="337" y="68" text-anchor="middle" fill="#22d3ee" font-size="30" font-weight="700">~10%</text>
+    <text x="337" y="92" text-anchor="middle" fill="#63637a" font-size="11" class="m" letter-spacing="1.5">RESPONSE RATE</text>
+    <rect x="480" y="30" width="185" height="90" rx="12" fill="#12141a" stroke="rgba(167,139,250,.25)" stroke-width="1.5"/>
+    <text x="572" y="68" text-anchor="middle" fill="#a78bfa" font-size="30" font-weight="700">3–8</text>
+    <text x="572" y="92" text-anchor="middle" fill="#63637a" font-size="11" class="m" letter-spacing="1.5">PROPERTIES / DAY</text>
+    <rect x="715" y="30" width="175" height="90" rx="12" fill="rgba(52,211,153,.06)" stroke="rgba(52,211,153,.35)" stroke-width="2"/>
+    <text x="802" y="68" text-anchor="middle" fill="#34d399" font-size="30" font-weight="700">1–2</text>
+    <text x="802" y="92" text-anchor="middle" fill="#63637a" font-size="11" class="m" letter-spacing="1.5">DEALS / MONTH</text>
+    <text x="102" y="162" text-anchor="middle" fill="#a1a1aa" font-size="14" font-weight="500">22–40%</text>
+    <text x="102" y="180" text-anchor="middle" fill="#63637a" font-size="11">off-market rate</text>
+    <text x="337" y="162" text-anchor="middle" fill="#a1a1aa" font-size="14" font-weight="500">12–20</text>
+    <text x="337" y="180" text-anchor="middle" fill="#63637a" font-size="11">leads per deal</text>
+    <text x="572" y="162" text-anchor="middle" fill="#a1a1aa" font-size="14" font-weight="500">~$190</text>
+    <text x="572" y="180" text-anchor="middle" fill="#63637a" font-size="11">cost per deal</text>
+    <text x="802" y="162" text-anchor="middle" fill="#a1a1aa" font-size="14" font-weight="500">14–21 days</text>
+    <text x="802" y="180" text-anchor="middle" fill="#63637a" font-size="11">lead to close</text>
   </svg>
-
-  <p class="small an d4" style="margin-top:20px">Calling alternative: 80 connections/day + 30 quality conversations (90+ sec) = similar results</p>
+  <p class="a a4" style="margin-top:20px;font-size:.9rem;color:var(--t3)">Calling alternative: 80 connections/day + 30 quality conversations (90+ sec) = similar results</p>
 </div>
 
-<!-- ═══ 6: PILLAR 2 — THE TOOL ═══ -->
-<div class="s split-h">
-  <div class="pad-l">
-    <div class="tag an">Pillar 02 — The Tool</div>
-    <h2 class="an d1">The <span class="purple">Deal Generator</span></h2>
-    <p class="body an d2">The model tells you what to do. The tool makes it happen consistently. No VAs. No manual work. AI handles the heavy lifting.</p>
-    <p class="body an d3" style="margin-top:12px">Within 1–2 hours of daily work, the system qualifies your leads, categorizes agents into tiers, and surfaces exactly who you need to call.</p>
-  </div>
-  <div class="pad-r" style="align-items:center">
-    <!-- System architecture diagram -->
-    <svg viewBox="0 0 360 380" class="an d3" style="max-width:400px;width:100%" xmlns="http://www.w3.org/2000/svg">
-      <!-- Input -->
-      <rect x="110" y="5" width="140" height="36" rx="6" fill="rgba(255,107,53,.08)" stroke="rgba(255,107,53,.25)" stroke-width="1"/>
-      <text x="180" y="27" text-anchor="middle" fill="#ff6b35" font-size="10" font-weight="600">AGENT LISTS (20K+)</text>
-      <!-- Arrow -->
-      <line x1="180" y1="41" x2="180" y2="60" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
-      <polygon points="180,65 176,57 184,57" fill="rgba(255,255,255,.15)"/>
-      <!-- AI Engine box -->
-      <rect x="30" y="70" width="300" height="140" rx="10" fill="#12141a" stroke="rgba(167,139,250,.2)" stroke-width="1.5"/>
-      <text x="180" y="94" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="600" class="mono-text" letter-spacing="2">AI ENGINE</text>
-      <line x1="50" y1="104" x2="310" y2="104" stroke="rgba(255,255,255,.05)" stroke-width="1"/>
-      <!-- Sub-modules -->
-      <rect x="50" y="114" width="125" height="32" rx="4" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-      <text x="112" y="134" text-anchor="middle" fill="#a1a1aa" font-size="9">Auto-Outreach</text>
-      <rect x="185" y="114" width="125" height="32" rx="4" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-      <text x="247" y="134" text-anchor="middle" fill="#a1a1aa" font-size="9">4-Month Follow-Up</text>
-      <rect x="50" y="156" width="125" height="32" rx="4" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-      <text x="112" y="176" text-anchor="middle" fill="#a1a1aa" font-size="9">Lead Qualification</text>
-      <rect x="185" y="156" width="125" height="32" rx="4" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-      <text x="247" y="176" text-anchor="middle" fill="#a1a1aa" font-size="9">Tier Sorting</text>
-      <!-- Output arrows -->
-      <line x1="120" y1="210" x2="120" y2="250" stroke="rgba(255,107,53,.2)" stroke-width="1"/>
-      <polygon points="120,255 116,247 124,247" fill="#ff6b35" opacity=".4"/>
-      <line x1="240" y1="210" x2="240" y2="250" stroke="rgba(52,211,153,.2)" stroke-width="1"/>
-      <polygon points="240,255 236,247 244,247" fill="#34d399" opacity=".4"/>
-      <!-- Tier output -->
-      <rect x="50" y="260" width="140" height="36" rx="6" fill="#12141a" stroke="rgba(255,107,53,.2)" stroke-width="1"/>
-      <text x="120" y="276" text-anchor="middle" fill="#ff6b35" font-size="9" class="mono-text">T1</text>
-      <text x="120" y="289" text-anchor="middle" fill="#a1a1aa" font-size="8" class="mono-text">T2 · T3 PIPELINE</text>
-      <!-- Dispo output -->
-      <rect x="170" y="260" width="140" height="36" rx="6" fill="#12141a" stroke="rgba(52,211,153,.2)" stroke-width="1"/>
-      <text x="240" y="276" text-anchor="middle" fill="#34d399" font-size="9" class="mono-text">DISPO</text>
-      <text x="240" y="289" text-anchor="middle" fill="#a1a1aa" font-size="8" class="mono-text">BUYERS · DEALS</text>
-      <!-- Final output -->
-      <line x1="180" y1="296" x2="180" y2="330" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-      <polygon points="180,335 176,327 184,327" fill="rgba(255,255,255,.12)"/>
-      <rect x="100" y="340" width="160" height="32" rx="6" fill="rgba(52,211,153,.06)" stroke="rgba(52,211,153,.2)" stroke-width="1"/>
-      <text x="180" y="360" text-anchor="middle" fill="#34d399" font-size="10" font-weight="500">YOUR DAILY CALL LIST</text>
+<!-- 6: PILLAR 2 TOOL -->
+<div class="s sp">
+  <div class="pl"><div class="tag a">Pillar 02 — The Tool</div><h2 class="a a1">The <span class="purple">Deal Generator</span></h2><p class="body a a2">The model tells you what to do. The tool makes it happen consistently. No VAs. No manual work. AI handles the heavy lifting.</p><p class="body a a3" style="margin-top:12px">Within 1–2 hours of daily work, the system qualifies your leads, categorizes agents, and surfaces exactly who you need to call.</p></div>
+  <div class="pr" style="align-items:center">
+    <svg viewBox="0 0 420 440" class="a a3" style="width:100%;max-height:78vh" xmlns="http://www.w3.org/2000/svg">
+      <rect x="115" y="5" width="190" height="42" rx="8" fill="rgba(255,107,53,.08)" stroke="rgba(255,107,53,.25)"/>
+      <text x="210" y="31" text-anchor="middle" fill="#ff6b35" font-size="13" font-weight="600">AGENT LISTS (20K+)</text>
+      <line x1="210" y1="47" x2="210" y2="72" stroke="rgba(255,255,255,.1)"/><polygon points="210,78 205,68 215,68" fill="rgba(255,255,255,.15)"/>
+      <rect x="30" y="84" width="360" height="168" rx="12" fill="#12141a" stroke="rgba(167,139,250,.2)" stroke-width="1.5"/>
+      <text x="210" y="112" text-anchor="middle" fill="#a78bfa" font-size="12" font-weight="600" class="m" letter-spacing="2">AI ENGINE</text>
+      <line x1="55" y1="124" x2="365" y2="124" stroke="rgba(255,255,255,.05)"/>
+      <rect x="55" y="136" width="152" height="40" rx="6" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)"/>
+      <text x="131" y="161" text-anchor="middle" fill="#a1a1aa" font-size="13">Auto-Outreach</text>
+      <rect x="217" y="136" width="152" height="40" rx="6" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)"/>
+      <text x="293" y="161" text-anchor="middle" fill="#a1a1aa" font-size="13">4-Mo Follow-Up</text>
+      <rect x="55" y="186" width="152" height="40" rx="6" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)"/>
+      <text x="131" y="211" text-anchor="middle" fill="#a1a1aa" font-size="13">Lead Qualification</text>
+      <rect x="217" y="186" width="152" height="40" rx="6" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.06)"/>
+      <text x="293" y="211" text-anchor="middle" fill="#a1a1aa" font-size="13">Tier Sorting</text>
+      <line x1="140" y1="252" x2="140" y2="296" stroke="rgba(255,107,53,.2)"/><polygon points="140,302 135,292 145,292" fill="#ff6b35" opacity=".4"/>
+      <line x1="280" y1="252" x2="280" y2="296" stroke="rgba(52,211,153,.2)"/><polygon points="280,302 275,292 285,292" fill="#34d399" opacity=".4"/>
+      <rect x="45" y="308" width="170" height="44" rx="8" fill="#12141a" stroke="rgba(255,107,53,.2)"/>
+      <text x="130" y="326" text-anchor="middle" fill="#ff6b35" font-size="11" class="m">T1 · T2 · T3</text>
+      <text x="130" y="342" text-anchor="middle" fill="#a1a1aa" font-size="11">PIPELINE</text>
+      <rect x="225" y="308" width="170" height="44" rx="8" fill="#12141a" stroke="rgba(52,211,153,.2)"/>
+      <text x="310" y="326" text-anchor="middle" fill="#34d399" font-size="11" class="m">DISPO</text>
+      <text x="310" y="342" text-anchor="middle" fill="#a1a1aa" font-size="11">BUYERS · DEALS</text>
+      <line x1="210" y1="352" x2="210" y2="390" stroke="rgba(255,255,255,.08)"/><polygon points="210,396 205,386 215,386" fill="rgba(255,255,255,.12)"/>
+      <rect x="100" y="400" width="220" height="36" rx="8" fill="rgba(52,211,153,.06)" stroke="rgba(52,211,153,.2)"/>
+      <text x="210" y="423" text-anchor="middle" fill="#34d399" font-size="13" font-weight="500">YOUR DAILY CALL LIST</text>
     </svg>
   </div>
 </div>
 
-<!-- ═══ 7: TIER SYSTEM ═══ -->
-<div class="s split-h">
-  <div class="pad-l">
-    <div class="tag an">Pillar 02 — The Tool</div>
-    <h2 class="an d1">The <span class="accent">tier system</span></h2>
-    <p class="body an d2">Every agent gets categorized. The system knows where they are and what to do next.</p>
-  </div>
-  <div class="pad-r" style="align-items:center">
-    <!-- Tier bucket diagram -->
-    <svg viewBox="0 0 360 310" class="an d3" style="max-width:400px;width:100%" xmlns="http://www.w3.org/2000/svg">
-      <!-- T1 -->
-      <rect x="10" y="10" width="340" height="72" rx="8" fill="rgba(255,107,53,.06)" stroke="rgba(255,107,53,.25)" stroke-width="1.5"/>
-      <rect x="24" y="28" width="32" height="32" rx="16" fill="rgba(255,107,53,.15)"/>
-      <text x="40" y="49" text-anchor="middle" fill="#ff6b35" font-size="12" font-weight="600" class="mono-text">T1</text>
-      <text x="72" y="40" fill="#f0f0f2" font-size="12" font-weight="600">Active Deals</text>
-      <text x="72" y="58" fill="#63637a" font-size="10">Working a deal. Once closed, stay forever.</text>
-
-      <!-- Arrow -->
-      <line x1="180" y1="82" x2="180" y2="100" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-
-      <!-- T2 -->
-      <rect x="10" y="105" width="340" height="72" rx="8" fill="rgba(167,139,250,.04)" stroke="rgba(167,139,250,.15)" stroke-width="1"/>
-      <rect x="24" y="123" width="32" height="32" rx="16" fill="rgba(167,139,250,.12)"/>
-      <text x="40" y="144" text-anchor="middle" fill="#a78bfa" font-size="12" font-weight="600" class="mono-text">T2</text>
-      <text x="72" y="135" fill="#f0f0f2" font-size="12" font-weight="600">Fallouts</text>
-      <text x="72" y="153" fill="#63637a" font-size="10">Had address, didn't close. Monthly follow-up.</text>
-
-      <!-- Arrow -->
-      <line x1="180" y1="177" x2="180" y2="195" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-
-      <!-- T3 -->
-      <rect x="10" y="200" width="340" height="72" rx="8" fill="rgba(34,211,238,.04)" stroke="rgba(34,211,238,.12)" stroke-width="1"/>
-      <rect x="24" y="218" width="32" height="32" rx="16" fill="rgba(34,211,238,.1)"/>
-      <text x="40" y="239" text-anchor="middle" fill="#22d3ee" font-size="12" font-weight="600" class="mono-text">T3</text>
-      <text x="72" y="230" fill="#f0f0f2" font-size="12" font-weight="600">Pipeline Builders</text>
-      <text x="72" y="248" fill="#63637a" font-size="10">Most agents. AI nurtures until ready.</text>
-
-      <!-- Result bar -->
-      <rect x="60" y="286" width="240" height="20" rx="4" fill="rgba(52,211,153,.08)" stroke="rgba(52,211,153,.15)" stroke-width="1"/>
-      <text x="180" y="300" text-anchor="middle" fill="#34d399" font-size="9" class="mono-text" letter-spacing="1">AI SURFACES HOT LEADS DAILY</text>
+<!-- 7: TIER SYSTEM -->
+<div class="s sp">
+  <div class="pl"><div class="tag a">Pillar 02 — The Tool</div><h2 class="a a1">The <span class="accent">tier system</span></h2><p class="body a a2">Every agent gets categorized. The system knows where they are and what to do next.</p></div>
+  <div class="pr" style="align-items:center">
+    <svg viewBox="0 0 440 380" class="a a3" style="width:100%;max-height:78vh" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="420" height="92" rx="10" fill="rgba(255,107,53,.06)" stroke="rgba(255,107,53,.25)" stroke-width="1.5"/>
+      <rect x="28" y="32" width="44" height="44" rx="22" fill="rgba(255,107,53,.15)"/>
+      <text x="50" y="60" text-anchor="middle" fill="#ff6b35" font-size="16" font-weight="600" class="m">T1</text>
+      <text x="90" y="48" fill="#f0f0f2" font-size="15" font-weight="600">Active Deals</text>
+      <text x="90" y="70" fill="#63637a" font-size="13">Working a deal. Once closed, stay forever.</text>
+      <rect x="10" y="116" width="420" height="92" rx="10" fill="rgba(167,139,250,.04)" stroke="rgba(167,139,250,.15)"/>
+      <rect x="28" y="138" width="44" height="44" rx="22" fill="rgba(167,139,250,.12)"/>
+      <text x="50" y="166" text-anchor="middle" fill="#a78bfa" font-size="16" font-weight="600" class="m">T2</text>
+      <text x="90" y="154" fill="#f0f0f2" font-size="15" font-weight="600">Fallouts</text>
+      <text x="90" y="176" fill="#63637a" font-size="13">Had address, didn't close. Monthly follow-up.</text>
+      <rect x="10" y="222" width="420" height="92" rx="10" fill="rgba(34,211,238,.04)" stroke="rgba(34,211,238,.12)"/>
+      <rect x="28" y="244" width="44" height="44" rx="22" fill="rgba(34,211,238,.1)"/>
+      <text x="50" y="272" text-anchor="middle" fill="#22d3ee" font-size="16" font-weight="600" class="m">T3</text>
+      <text x="90" y="260" fill="#f0f0f2" font-size="15" font-weight="600">Pipeline Builders</text>
+      <text x="90" y="282" fill="#63637a" font-size="13">Most agents. AI nurtures until ready.</text>
+      <rect x="60" y="336" width="320" height="32" rx="6" fill="rgba(52,211,153,.08)" stroke="rgba(52,211,153,.15)"/>
+      <text x="220" y="357" text-anchor="middle" fill="#34d399" font-size="11" class="m" letter-spacing="1.5">AI SURFACES HOT LEADS DAILY</text>
     </svg>
   </div>
 </div>
 
-<!-- ═══ 8: TOOL OBJECTIONS ═══ -->
-<div class="s split-h">
-  <div class="pad-l">
-    <div class="tag an">Pillar 02 — The Tool</div>
-    <h2 class="an d1">Not just <span class="accent">software</span></h2>
-    <p class="body an d2">You could do this off Zillow. It'll take a year. The Deal Generator is why this works consistently.</p>
-  </div>
-  <div class="pad-r">
-    <div class="qa an d2">
-      <div class="qa-q">"I've tried other CRMs and systems."</div>
-      <div class="qa-a">Those were tools without a model. The Deal Generator is built specifically for agent outreach. Tool + model + implementation is why this works.</div>
-    </div>
-    <div class="qa an d3">
-      <div class="qa-q">"I want this to be hands-off / automated."</div>
-      <div class="qa-a">Work is front-loaded, not ongoing. Once the system is live, daily commitment drops to 1–2 focused hours. AI handles the rest 24/7.</div>
-    </div>
-    <div class="qa an d4">
-      <div class="qa-q">"How does this fit my specific business?"</div>
-      <div class="qa-a">The system is modular — built around your market, your buy box, your goals. Flips, holds, creative, wholesale. Keep what fits. Assign what doesn't.</div>
-    </div>
+<!-- 8: TOOL OBJECTIONS -->
+<div class="s sp">
+  <div class="pl"><div class="tag a">Pillar 02 — The Tool</div><h2 class="a a1">Not just <span class="accent">software</span></h2><p class="body a a2">You could do this off Zillow. It'll take a year. The Deal Generator is why this works consistently.</p></div>
+  <div class="pr">
+    <div class="qa a a2"><div class="qa-q">"I've tried other CRMs and systems."</div><div class="qa-a">Those were tools without a model. The Deal Generator is built specifically for agent outreach. Tool + model + implementation is why this works.</div></div>
+    <div class="qa a a3"><div class="qa-q">"I want this to be hands-off / automated."</div><div class="qa-a">Work is front-loaded, not ongoing. Once the system is live, daily commitment drops to 1–2 focused hours. AI handles the rest 24/7.</div></div>
+    <div class="qa a a4"><div class="qa-q">"How does this fit my specific business?"</div><div class="qa-a">The system is modular — built around your market, your buy box, your goals. Flips, holds, creative, wholesale. Keep what fits. Assign what doesn't.</div></div>
   </div>
 </div>
 
-<!-- ═══ 9: DEMO CUE ═══ -->
-<div class="s dot-bg center-col">
-  <div class="tag an">Live Walkthrough</div>
-  <h1 class="an d1">Let me <span class="accent">show you</span></h1>
+<!-- 9: DEMO CUE -->
+<div class="s dot-bg cc">
+  <div class="tag a">Live Walkthrough</div>
+  <h1 class="a a1">Let me <span class="accent">show you</span></h1>
 </div>
 
-<!-- ═══ 10: PILLAR 3 — IMPLEMENTATION ═══ -->
-<div class="s split-h">
-  <div class="pad-l">
-    <div class="tag an">Pillar 03 — Implementation</div>
-    <h2 class="an d1"><span class="green">Implementation</span> & support</h2>
-    <p class="body an d2">Anybody can text agents. Doesn't mean you'll do deals consistently. We make sure you actually execute.</p>
-  </div>
-  <div class="pad-r">
-    <div class="tl">
-      <div class="tl-item an d2">
-        <div class="tl-node"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-body"><strong>Launch Call</strong><span>Full system walkthrough. Everything set up.</span></div>
-      </div>
-      <div class="tl-item an d3">
-        <div class="tl-node"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-body"><strong>All Systems Go Call</strong><span>A2P approved. Green light for outreach.</span></div>
-      </div>
-      <div class="tl-item an d4">
-        <div class="tl-node"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-body"><strong>1-on-1s with Matt & Terrence</strong><span>Strategy and implementation. Hands-on.</span></div>
-      </div>
-      <div class="tl-item an d5">
-        <div class="tl-node"><div class="tl-dot"></div><div class="tl-line"></div></div>
-        <div class="tl-body"><strong>AI Assistant — 24/7</strong><span>Never waiting for answers between calls.</span></div>
-      </div>
-      <div class="tl-item an d6">
-        <div class="tl-node"><div class="tl-dot"></div></div>
-        <div class="tl-body"><strong>Daily Calls + Monthly Challenges</strong><span>Community of operators. Leaderboard. Daily accountability.</span></div>
-      </div>
-    </div>
+<!-- 10: PILLAR 3 IMPLEMENTATION -->
+<div class="s sp">
+  <div class="pl"><div class="tag a">Pillar 03 — Implementation</div><h2 class="a a1"><span class="green">Implementation</span> & support</h2><p class="body a a2">Anybody can text agents. Doesn't mean you'll do deals consistently. We make sure you actually execute.</p></div>
+  <div class="pr">
+    <div class="tl-i a a2"><div class="tl-n"><div class="tl-d"></div><div class="tl-l"></div></div><div class="tl-b"><strong>Launch Call</strong><span>Full system walkthrough. Everything set up.</span></div></div>
+    <div class="tl-i a a3"><div class="tl-n"><div class="tl-d"></div><div class="tl-l"></div></div><div class="tl-b"><strong>All Systems Go Call</strong><span>A2P approved. Green light for outreach.</span></div></div>
+    <div class="tl-i a a4"><div class="tl-n"><div class="tl-d"></div><div class="tl-l"></div></div><div class="tl-b"><strong>1-on-1s with Matt & Terrence</strong><span>Strategy and implementation. Hands-on.</span></div></div>
+    <div class="tl-i a a5"><div class="tl-n"><div class="tl-d"></div><div class="tl-l"></div></div><div class="tl-b"><strong>AI Assistant — 24/7</strong><span>Never waiting for answers between calls.</span></div></div>
+    <div class="tl-i a a6"><div class="tl-n"><div class="tl-d"></div></div><div class="tl-b"><strong>Daily Calls + Monthly Challenges</strong><span>Community of operators. Leaderboard. Daily accountability.</span></div></div>
   </div>
 </div>
 
-<!-- ═══ 11: IMPLEMENTATION OBJECTIONS ═══ -->
-<div class="s split-h">
-  <div class="pad-l">
-    <div class="tag an">Pillar 03 — Implementation</div>
-    <h2 class="an d1">We've <span class="green">heard it all</span></h2>
-    <p class="body an d2">Not a course. Not a PDF. Not "good luck." We built the program to solve these exact concerns.</p>
-  </div>
-  <div class="pad-r">
-    <div class="qa an d2">
-      <div class="qa-q">"I need to think about it / talk to my partner."</div>
-      <div class="qa-a">What specifically needs clarity? If this works the way we outlined — what's the downside of starting now vs. waiting another month?</div>
-    </div>
-    <div class="qa an d3">
-      <div class="qa-q">"I've been burned before. I hate salesy programs."</div>
-      <div class="qa-a">We show proof every month — real deals, real numbers, live on stream. You're getting proximity to operators, not hype.</div>
-    </div>
-    <div class="terminal an d4" style="margin-top:20px">
-      <div class="output">→ We don't hand you a tool and say good luck.</div>
-      <div class="output">→ We hold your hand until you're producing.</div>
-    </div>
+<!-- 11: IMPLEMENTATION OBJECTIONS -->
+<div class="s sp">
+  <div class="pl"><div class="tag a">Pillar 03 — Implementation</div><h2 class="a a1">We've <span class="green">heard it all</span></h2><p class="body a a2">Not a course. Not a PDF. Not "good luck." We built the program to solve these exact concerns.</p></div>
+  <div class="pr">
+    <div class="qa a a2"><div class="qa-q">"I need to think about it / talk to my partner."</div><div class="qa-a">What specifically needs clarity? If this works the way we outlined — what's the downside of starting now vs. waiting another month?</div></div>
+    <div class="qa a a3"><div class="qa-q">"I've been burned before. I hate salesy programs."</div><div class="qa-a">We show proof every month — real deals, real numbers, live on stream. You're getting proximity to operators, not hype.</div></div>
+    <div class="term a a4" style="margin-top:20px"><div class="o">→ We don't hand you a tool and say good luck.</div><div class="o">→ We hold your hand until you're producing.</div></div>
   </div>
 </div>
 
-<!-- ═══ 12: DEAL FLOW VS CHASING ═══ -->
-<div class="s grid-bg center-col">
-  <div class="tag an">The Difference</div>
-  <h2 class="an d1">Deal <span class="accent">flow</span> vs deal chasing</h2>
-  <!-- Side by side diagram -->
-  <svg viewBox="0 0 700 260" class="an d2" style="max-width:800px;margin-top:36px;width:100%" xmlns="http://www.w3.org/2000/svg">
-    <!-- Chasing side -->
-    <rect x="10" y="10" width="310" height="240" rx="10" fill="#12141a" stroke="rgba(248,113,113,.15)" stroke-width="1"/>
-    <text x="165" y="42" text-anchor="middle" fill="#f87171" font-size="11" font-weight="600" class="mono-text" letter-spacing="1.5">DEAL CHASING</text>
-    <line x1="30" y1="54" x2="300" y2="54" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
-    <!-- Hamster wheel icon - circle -->
-    <circle cx="165" cy="100" r="28" fill="none" stroke="rgba(248,113,113,.15)" stroke-width="1" stroke-dasharray="4,4"/>
-    <text x="165" y="104" text-anchor="middle" fill="#63637a" font-size="18">🔄</text>
-    <text x="165" y="150" text-anchor="middle" fill="#a1a1aa" font-size="10">Always hunting next deal</text>
-    <text x="165" y="168" text-anchor="middle" fill="#63637a" font-size="10">Inconsistent results</text>
-    <text x="165" y="186" text-anchor="middle" fill="#63637a" font-size="10">Burnout inevitable</text>
-    <text x="165" y="204" text-anchor="middle" fill="#63637a" font-size="10">Can't take a week off</text>
-    <text x="165" y="232" text-anchor="middle" fill="#f87171" font-size="10" font-weight="500">Hustle ≠ business</text>
-
-    <!-- VS -->
-    <circle cx="350" cy="130" r="16" fill="#1e222d" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
-    <text x="350" y="134" text-anchor="middle" fill="#63637a" font-size="9" font-weight="600">VS</text>
-
-    <!-- Flow side -->
-    <rect x="380" y="10" width="310" height="240" rx="10" fill="#12141a" stroke="rgba(52,211,153,.2)" stroke-width="1.5"/>
-    <text x="535" y="42" text-anchor="middle" fill="#34d399" font-size="11" font-weight="600" class="mono-text" letter-spacing="1.5">DEAL FLOW</text>
-    <line x1="400" y1="54" x2="670" y2="54" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
-    <!-- System icon - straight arrow -->
-    <line x1="505" y1="82" x2="565" y2="82" stroke="rgba(52,211,153,.3)" stroke-width="2"/>
-    <polygon points="570,82 562,77 562,87" fill="#34d399" opacity=".5"/>
-    <rect x="497" y="90" width="76" height="24" rx="4" fill="rgba(52,211,153,.08)" stroke="rgba(52,211,153,.15)" stroke-width="1"/>
-    <text x="535" y="106" text-anchor="middle" fill="#34d399" font-size="9" class="mono-text">SYSTEM</text>
-    <text x="535" y="142" text-anchor="middle" fill="#a1a1aa" font-size="10">Same process every time</text>
-    <text x="535" y="160" text-anchor="middle" fill="#a1a1aa" font-size="10">Predictable, scalable</text>
-    <text x="535" y="178" text-anchor="middle" fill="#a1a1aa" font-size="10">Sustainable long-term</text>
-    <text x="535" y="196" text-anchor="middle" fill="#a1a1aa" font-size="10">AI works while you don't</text>
-    <text x="535" y="232" text-anchor="middle" fill="#34d399" font-size="10" font-weight="500">System = business</text>
+<!-- 12: DEAL FLOW VS CHASING -->
+<div class="s grid-bg cc">
+  <div class="tag a">The Difference</div>
+  <h2 class="a a1">Deal <span class="accent">flow</span> vs deal chasing</h2>
+  <svg viewBox="0 0 800 300" class="a a2" style="max-width:95%;margin-top:40px;width:100%" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="10" width="355" height="280" rx="12" fill="#12141a" stroke="rgba(248,113,113,.15)"/>
+    <text x="187" y="44" text-anchor="middle" fill="#f87171" font-size="13" font-weight="600" class="m" letter-spacing="2">DEAL CHASING</text>
+    <line x1="35" y1="60" x2="340" y2="60" stroke="rgba(255,255,255,.04)"/>
+    <circle cx="187" cy="108" r="30" fill="none" stroke="rgba(248,113,113,.15)" stroke-dasharray="4,4"/>
+    <text x="187" y="114" text-anchor="middle" fill="#63637a" font-size="24">🔄</text>
+    <text x="187" y="164" text-anchor="middle" fill="#a1a1aa" font-size="14">Always hunting next deal</text>
+    <text x="187" y="186" text-anchor="middle" fill="#63637a" font-size="14">Inconsistent results</text>
+    <text x="187" y="208" text-anchor="middle" fill="#63637a" font-size="14">Burnout inevitable</text>
+    <text x="187" y="230" text-anchor="middle" fill="#63637a" font-size="14">Can't take a week off</text>
+    <text x="187" y="268" text-anchor="middle" fill="#f87171" font-size="14" font-weight="500">Hustle ≠ business</text>
+    <circle cx="400" cy="150" r="20" fill="#1e222d" stroke="rgba(255,255,255,.08)"/>
+    <text x="400" y="155" text-anchor="middle" fill="#63637a" font-size="11" font-weight="600">VS</text>
+    <rect x="435" y="10" width="355" height="280" rx="12" fill="#12141a" stroke="rgba(52,211,153,.2)" stroke-width="1.5"/>
+    <text x="612" y="44" text-anchor="middle" fill="#34d399" font-size="13" font-weight="600" class="m" letter-spacing="2">DEAL FLOW</text>
+    <line x1="460" y1="60" x2="765" y2="60" stroke="rgba(255,255,255,.04)"/>
+    <line x1="580" y1="90" x2="644" y2="90" stroke="rgba(52,211,153,.3)" stroke-width="2"/><polygon points="650,90 640,84 640,96" fill="#34d399" opacity=".5"/>
+    <rect x="570" y="100" width="84" height="28" rx="6" fill="rgba(52,211,153,.08)" stroke="rgba(52,211,153,.15)"/>
+    <text x="612" y="119" text-anchor="middle" fill="#34d399" font-size="11" class="m">SYSTEM</text>
+    <text x="612" y="158" text-anchor="middle" fill="#a1a1aa" font-size="14">Same process every time</text>
+    <text x="612" y="180" text-anchor="middle" fill="#a1a1aa" font-size="14">Predictable, scalable</text>
+    <text x="612" y="202" text-anchor="middle" fill="#a1a1aa" font-size="14">Sustainable long-term</text>
+    <text x="612" y="224" text-anchor="middle" fill="#a1a1aa" font-size="14">AI works while you don't</text>
+    <text x="612" y="268" text-anchor="middle" fill="#34d399" font-size="14" font-weight="500">System = business</text>
   </svg>
 </div>
 
-<!-- ═══ 13: CLOSE ═══ -->
-<div class="s grid-bg center-col">
-  <div class="tag an">Let's Build This</div>
-  <h1 class="an d1">Model. Tool. <span class="accent">Implementation.</span></h1>
-  <p class="body an d2" style="text-align:center;max-width:520px;font-size:1.15rem">You get all three. That's what makes this a business — not another piece of software.</p>
-
-  <!-- Final triangle callback -->
-  <svg viewBox="0 0 420 280" class="an d3" style="max-width:480px;margin-top:40px;width:100%" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="210,20 390,250 30,250" fill="none" stroke="rgba(255,107,53,.2)" stroke-width="1.5"/>
-    <polygon points="210,20 390,250 30,250" fill="url(#triGlow2)" opacity=".5"/>
-    <defs><radialGradient id="triGlow2" cx="50%" cy="60%" r="50%"><stop offset="0%" stop-color="rgba(255,107,53,.08)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
-    <!-- Nodes -->
-    <circle cx="210" cy="20" r="32" fill="#12141a" stroke="#ff6b35" stroke-width="1.5"/>
-    <text x="210" y="16" text-anchor="middle" fill="#ff6b35" font-size="8" class="mono-text" letter-spacing="1">01</text>
-    <text x="210" y="30" text-anchor="middle" fill="#f0f0f2" font-size="10" font-weight="600">MODEL</text>
-    <circle cx="390" cy="250" r="32" fill="#12141a" stroke="#a78bfa" stroke-width="1.5"/>
-    <text x="390" y="246" text-anchor="middle" fill="#a78bfa" font-size="8" class="mono-text" letter-spacing="1">02</text>
-    <text x="390" y="260" text-anchor="middle" fill="#f0f0f2" font-size="10" font-weight="600">TOOL</text>
-    <circle cx="30" cy="250" r="32" fill="#12141a" stroke="#34d399" stroke-width="1.5"/>
-    <text x="30" y="246" text-anchor="middle" fill="#34d399" font-size="8" class="mono-text" letter-spacing="1">03</text>
-    <text x="30" y="260" text-anchor="middle" fill="#f0f0f2" font-size="10" font-weight="600">SUPPORT</text>
-    <text x="210" y="172" text-anchor="middle" fill="rgba(255,107,53,.25)" font-size="9" font-weight="600" class="mono-text" letter-spacing="3">NO FLUFF</text>
+<!-- 13: CLOSE -->
+<div class="s grid-bg cc">
+  <div class="tag a">Let's Build This</div>
+  <h1 class="a a1">Model. Tool. <span class="accent">Implementation.</span></h1>
+  <p class="body a a2" style="text-align:center;max-width:520px;font-size:1.15rem">You get all three. That's what makes this a business — not another piece of software.</p>
+  <svg viewBox="0 0 520 340" class="a a3" style="max-width:85%;margin-top:44px;width:100%" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="260,30 480,300 40,300" fill="none" stroke="rgba(255,107,53,.2)" stroke-width="1.5"/>
+    <polygon points="260,30 480,300 40,300" fill="url(#tg2)" opacity=".5"/>
+    <defs><radialGradient id="tg2" cx="50%" cy="60%" r="50%"><stop offset="0%" stop-color="rgba(255,107,53,.08)"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+    <circle cx="260" cy="30" r="40" fill="#12141a" stroke="#ff6b35" stroke-width="1.5"/>
+    <text x="260" y="24" text-anchor="middle" fill="#ff6b35" font-size="10" class="m" letter-spacing="1.5">01</text>
+    <text x="260" y="40" text-anchor="middle" fill="#f0f0f2" font-size="14" font-weight="600">MODEL</text>
+    <circle cx="480" cy="300" r="40" fill="#12141a" stroke="#a78bfa" stroke-width="1.5"/>
+    <text x="480" y="294" text-anchor="middle" fill="#a78bfa" font-size="10" class="m" letter-spacing="1.5">02</text>
+    <text x="480" y="310" text-anchor="middle" fill="#f0f0f2" font-size="14" font-weight="600">TOOL</text>
+    <circle cx="40" cy="300" r="40" fill="#12141a" stroke="#34d399" stroke-width="1.5"/>
+    <text x="40" y="294" text-anchor="middle" fill="#34d399" font-size="10" class="m" letter-spacing="1.5">03</text>
+    <text x="40" y="310" text-anchor="middle" fill="#f0f0f2" font-size="14" font-weight="600">SUPPORT</text>
+    <text x="260" y="210" text-anchor="middle" fill="rgba(255,107,53,.25)" font-size="13" font-weight="600" class="m" letter-spacing="4">NO FLUFF</text>
   </svg>
-
-  <p class="an d4" style="margin-top:32px;font-family:var(--mono);font-size:.62rem;color:var(--t3);letter-spacing:.12em">NO FLUFF PROGRAM © 2026</p>
+  <p class="a a4" style="margin-top:28px;font-family:var(--mono);font-size:.65rem;color:var(--t3);letter-spacing:.12em">NO FLUFF PROGRAM © 2026</p>
 </div>
 
 </div>
-
 <script>
-const ss=document.querySelectorAll('.s');
-let c=0,N=ss.length;
+const ss=document.querySelectorAll('.s');let c=0,N=ss.length;
 function go(n){if(n<0||n>=N)return;ss[c].classList.remove('on');c=n;ss[c].classList.add('on');
 document.getElementById('P').style.width=((c+1)/N*100)+'%';
 document.getElementById('C').textContent=String(c+1).padStart(2,'0')+'/'+String(N).padStart(2,'0')}
